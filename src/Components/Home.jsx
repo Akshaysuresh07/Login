@@ -1,8 +1,65 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import { googleLogout } from '@react-oauth/google';
+import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import  imgh from '../assets/Home.jpg'
 
 function Home() {
+  // const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const navigate=useNavigate()
+
+  const handleSignOut=()=>{
+    googleLogout();
+    sessionStorage.removeItem("userName");
+    setUserName('');
+   toast.info("Signout Successfully")
+    
+      navigate('/')
+ 
+ 
+  }
+  useEffect(()=>{
+    if(sessionStorage.getItem("userName"))
+    {
+      const storedUserName = sessionStorage.getItem('userName');
+      setUserName(storedUserName);
+
+    }
+  },[])
+
+ 
   return (
-    <div>Home</div>
+<>
+<header style={{background:"#B31312"}}>
+<Navbar className="bg-body-dar">
+      <Container>
+        <Navbar.Brand href="#home" className='text-white fs-3'> GLogin</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+        <Button onClick={handleSignOut}  variant="info">Sign Out <i class="fa-solid fa-right-from-bracket"></i></Button>{' '}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+</header>
+<div className="div" >
+
+<div className="mainDiv  d-flex justify-content-center" >
+ <h1 className='luser mt-5' style={{ fontSize:'50px' }} >Welcome <span className='text-warning'>{userName}</span></h1>
+
+</div>
+<div className="mainDiv  d-flex justify-content-center"  >
+<img src={imgh} width={'700px'}></img>
+<ToastContainer position='top-center' theme='colored' autoClose={3000} />
+</div>
+
+</div>
+
+</>
   )
 }
 

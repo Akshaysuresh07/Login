@@ -3,6 +3,16 @@
     margin: 0;
     box-sizing: border-box;
   }
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Rubik+Doodle+Shadow&display=swap');
+
   body{
     overflow-x: hidden;
   }
+  .luser {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(22, 43, 36);
+  }
+  

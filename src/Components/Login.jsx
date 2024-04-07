@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Form, InputGroup, Button } from 'react-bootstrap';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from "jwt-decode";
@@ -11,14 +9,8 @@ import logos from '../assets/logos.jpg'
 function Login() {
 
     const navigate = useNavigate()
-    const [showPassword, setShowPassword] = useState(false);
     const [userInputs, setUserInputs] = useState({ email: "", password: "" })
     console.log(userInputs);
-
-
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -33,12 +25,12 @@ function Login() {
             }
 
             if (userInputs.password.length < minLength) {
-                toast.warning("Password must be at least 8 characters long.");
+                toast.warning("Password must be at least 8 char.");
                 return;
 
             }
             setTimeout(() => {
-                navigate('/dash')
+                navigate('/home')
             }, 2000)
             setUserInputs({ email: '', password: '' });
 
@@ -50,57 +42,40 @@ function Login() {
 
     return (
         <>
-            <div  style={{ height: '100vh' }}>
+            <div className='container-fluid' style={{ height: '100vh' }}>
 
                 <div className="row">
-                    <div className="col-lg-8">
-                        <img src={logos} width={'800px'} height={'750px'}></img>
+                    <div className="col-lg-6">
+                        <img src={logos} width={'100%'} height={'600px'}></img>
                     </div>
-                    <div className="col-lg-4">
-                        <div className="d-flex flex-column align-items-center">
-                            <h4 className='mt-5'> <i class="fa-solid fa-fingerprint me-2"></i>Login</h4>
-                            <h2 className='mt-5 ' style={{ fontFamily: "Playfair Display" }}>Welcome Back</h2>
-                            <p style={{ fontFamily: 'PT Sans' }}>Enter your email and password to access your account</p>
+                    <div className="col-lg-6 mt-4  ">
+                        <div className=" border shadow  d-flex flex-column align-items-center rounded">
+                            <h1 className='mt-5 fs-2 fw-bold'>Login</h1>
+                            <h3 className='mt-2 ' style={{ fontFamily: "Playfair Display" }}>Welcome Back</h3>
 
-                            <Form>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label style={{ fontFamily: 'PT Sans' }}>Email</Form.Label>
-                                    <Form.Control style={{ borderColor: '#2b2b2b' }} type="email" placeholder="Enter your email" value={userInputs.email} onChange={e => setUserInputs({ ...userInputs, email: e.target.value })} />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Label style={{ fontFamily: 'PT Sans' }}>Password</Form.Label>
-                                    <InputGroup>
-                                        <Form.Control
-                                            type={showPassword ? "text" : "password"}
-                                            placeholder="Enter your password"
-                                            style={{ borderColor: '#2b2b2b' }}
-                                            value={userInputs.password}
-                                            onChange={e => setUserInputs({ ...userInputs, password: e.target.value })}
-                                        />
-                                        <Button variant="outline-secondary" onClick={togglePasswordVisibility}>
-                                            {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-                                        </Button>
-                                    </InputGroup>
-                                </Form.Group>
-                            </Form>
-                            <div className="forgetDiv d-flex justify-content-between align-items-center w-50 mt-1">
-                                <label className="mb-1" style={{ fontSize: '12px', fontFamily: 'PT Sans' }}>
-                                    <input type="checkbox" className="me-2" />
-                                    Remember me
-                                </label>
-                                <label className="mb-1" style={{ fontSize: '12px', fontFamily: 'PT Sans' }}>
-                                    Forget password?
-                                </label>
+                            <div className='mt-5'>
+                                <input style={{ backgroundColor: '#DDF2FD', width: '330px' }} value={userInputs.email} onChange={e => setUserInputs({ ...userInputs, email: e.target.value })} className='form-control rounded p-2  mb-3' type="text" placeholder='Username' />
+                                <input style={{ backgroundColor: '#DDF2FD', width: '330px' }} value={userInputs.password} onChange={e => setUserInputs({ ...userInputs, password: e.target.value })} className='form-control rounded p-2  mb-3' type="password" placeholder='Password' />
+
+                            </div>
+                            <div className=" d-flex justify-content-between align-items-center w-50 mt-1">
+                            <label className="mb-1" style={{ fontSize: '12px', fontFamily: 'PT Sans' }}>
+                                <input type="checkbox" className="me-2" />
+                                Remember me
+                            </label>
+                            <label className="mb-1" style={{ fontSize: '12px', fontFamily: 'PT Sans' }}>
+                                Forget password?
+                            </label>
 
                             </div>
 
-                            <div className="btnDiv w-100 justify-content-center d-flex mt-5">
-                                <button onClick={handleLogin} className='w-75 rounded' style={{ backgroundColor: '#2b2b2b', color: 'white', height: '40px' }}>Sign in</button>
+                            <div className=" w-100 justify-content-center d-flex mt-5">
+                                <button onClick={handleLogin} className='w-50 rounded' style={{ backgroundColor: '#3559E0', color: 'white', height: '40px' }}>Sign in</button>
 
                             </div>
-                            <div className="btnDiv w-100  justify-content-center d-flex mt-4 " >
+                            <div className=" w-100  justify-content-center d-flex mt-4 " >
                                 <GoogleLogin
-                                
+
                                     onSuccess={credentialResponse => {
                                         const credentialResponseDecoded = jwtDecode(credentialResponse.credential);
                                         console.log(credentialResponseDecoded);
@@ -117,8 +92,8 @@ function Login() {
 
                             </div>
 
-                            <div className="SignUpDiv">
-                                <p style={{ fontFamily: 'PT Sans' }} className='mt-lg-5'>Don't have an account?<b>SignUp</b> </p>
+                            <div >
+                                <p style={{ fontFamily: 'PT Sans' }} className='mt-lg-5'>Don't have an account? <span className='text-info'>SignUp</span> </p>
                             </div>
 
                         </div>
