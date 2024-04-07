@@ -54,7 +54,7 @@ function Login() {
                             <h3 className='mt-2 ' style={{ fontFamily: "Playfair Display" }}>Welcome Back</h3>
 
                             <div className='mt-5'>
-                                <input style={{ backgroundColor: '#DDF2FD', width: '330px' }} value={userInputs.email} onChange={e => setUserInputs({ ...userInputs, email: e.target.value })} className='form-control rounded p-2  mb-3' type="text" placeholder='Username' />
+                                <input style={{ backgroundColor: '#DDF2FD', width: '330px' }} value={userInputs.email} onChange={e => setUserInputs({ ...userInputs, email: e.target.value })} className='form-control rounded p-2  mb-3' type="email" placeholder='Username' />
                                 <input style={{ backgroundColor: '#DDF2FD', width: '330px' }} value={userInputs.password} onChange={e => setUserInputs({ ...userInputs, password: e.target.value })} className='form-control rounded p-2  mb-3' type="password" placeholder='Password' />
 
                             </div>

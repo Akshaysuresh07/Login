@@ -38,7 +38,7 @@ function Home() {
 <header style={{background:"#B31312"}}>
 <Navbar className="bg-body-dar">
       <Container>
-        <Navbar.Brand href="#home" className='text-white fs-3'> GLogin</Navbar.Brand>
+        <Navbar.Brand href="#home" className='text-white fs-3'> <span className='text-warning'>G</span>Login</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
         <Button onClick={handleSignOut}  variant="info">Sign Out <i class="fa-solid fa-right-from-bracket"></i></Button>{' '}
